@@ -1,0 +1,82 @@
+DemoEnter = {}
+local UITable = require("UI/login/Base/DemoEnterView") 
+
+
+function DemoEnter.Create()
+	local ui = {}
+	setmetatable(ui, {__index=UITable})	
+	ui:Create()
+    ui.layer = 1
+    UI.LoadUI(ui) 
+	return ui
+
+end
+
+
+function UITable:Awake()    
+ 	 
+	self:Init() 
+	  
+	self:InItClientData()
+end
+
+DemoEnter.clientData = {}
+--读取本地记录的数据（玩家账号及设置等信息）
+function UITable:InItClientData()
+ 			
+ 			local  data = {}   
+ 			data.money =  55
+ 			data.level = 1  
+ 			data.exp = 0
+ 			GameMainData.DemoPlayerModel:SetData(data)
+
+ 			local EquipData = {} 
+			local temp = {}
+ 
+			temp.ID = "1"
+			temp.Name = "武器1"
+			temp.jieshao = "武器1介绍"
+			temp.atk = 5
+			table.insert(EquipData,temp)
+			tempp = {}
+			tempp.ID = "2"
+			tempp.Name = "武器2"
+			tempp.jieshao = "武器2介绍"
+			tempp.atk = 15
+			table.insert(EquipData,tempp)
+ 			temppp = {}
+			temppp.ID = "3"
+			temppp.Name = "武器3"
+			temppp.jieshao = "武器3介绍"
+			temppp.atk = 25
+			table.insert(EquipData,temppp)
+ 			tempppp = {}
+			tempppp.ID = "4"
+			tempppp.Name = "武器4"
+			tempppp.jieshao = "武器4介绍"
+			tempppp.atk = 35
+			table.insert(EquipData,tempppp)
+			 temppppp = {}
+			temppppp.ID = "5"
+			temppppp.Name = "武器5"
+			temppppp.jieshao = "武器5介绍"
+			temppppp.atk = 45
+			table.insert(EquipData,temppppp)
+
+			GameMainData.DemoPlayerModel:SetEquipData(EquipData)
+ 			print(GameMainData.DemoPlayerModel:GetData().money)
+ end 
+
+ 
+ function UITable:ButtonClickHandler(btn) 
+   -- LuaTools.PlaySound("btnsound") 
+	 if  btn == self.buttonEnter then 
+
+	        print("click  buttonEnter") 
+		 	UI.OpenUI("DemoMain")
+		    self:Close()
+	end
+end
+
+ 
+  

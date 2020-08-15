@@ -1,0 +1,102 @@
+ConfigShopItem ={}
+
+local configName = "ConfigShopItem"
+
+local configTable ={
+	{
+		["ID"]="1",
+		["Name"]="商品1",
+		["Info"]="商品1介绍",
+		["price"]=30,
+		["num"]=10,
+	},
+	{
+		["ID"]="2",
+		["Name"]="商品2",
+		["Info"]="商品1介绍",
+		["price"]=60,
+		["num"]=10,
+	},
+	{
+		["ID"]="3",
+		["Name"]="商品3",
+		["Info"]="商品3介绍",
+		["price"]=70,
+		["num"]=10,
+	},
+	{
+		["ID"]="4",
+		["Name"]="商品4",
+		["Info"]="商品4介绍",
+		["price"]=80,
+		["num"]=10,
+	},
+	{
+		["ID"]="5",
+		["Name"]="商品5",
+		["Info"]="商品5介绍",
+		["price"]=90,
+		["num"]=10,
+	},
+	{
+		["ID"]="6",
+		["Name"]="商品6",
+		["Info"]="商品6介绍",
+		["price"]=100,
+		["num"]=10,
+	},
+	{
+		["ID"]="7",
+		["Name"]="商品7",
+		["Info"]="商品7介绍",
+		["price"]=110,
+		["num"]=10,
+	},
+	{
+		["ID"]="8",
+		["Name"]="商品8",
+		["Info"]="商品8介绍",
+		["price"]=120,
+		["num"]=10,
+	},
+	{
+		["ID"]="9",
+		["Name"]="商品9",
+		["Info"]="商品9介绍",
+		["price"]=130,
+		["num"]=10,
+	},
+	{
+		["ID"]="10",
+		["Name"]="商品10",
+		["Info"]="商品10介绍",
+		["price"]=150,
+		["num"]=10,
+	},
+}
+function ConfigShopItem.getVarByCustom(name,value)
+	for key,var in pairs(configTable) do
+		if var[name] == value then
+			return var
+		end
+	end
+	return nil
+end
+
+function ConfigShopItem.getVarById(id)
+	for key,var in pairs(configTable) do
+		if tonumber(var.ID) == tonumber(id) then
+			return var
+		end
+	end
+	return nil
+end
+
+function ConfigShopItem.getVarByIndex(index)
+print()
+	return configTable[tonumber(index)]
+end
+
+function ConfigShopItem.getsize()
+		return #configTable
+	end

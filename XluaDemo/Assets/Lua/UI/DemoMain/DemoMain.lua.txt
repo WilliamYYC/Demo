@@ -1,0 +1,80 @@
+DemoMain = {}
+local UITable = require("UI/DemoMain/Base/DemoMainView") 
+
+
+function DemoMain.Create()
+	local ui = {}
+	setmetatable(ui, {__index=UITable})	
+	ui:Create()
+    ui.layer = 2
+    UI.LoadUI(ui) 
+	return ui
+
+end
+
+
+function UITable:Awake()    
+ 	 
+	self:Init() 
+	  
+	self:InItClientData()
+    self:AddListener("rayF",self.rayF)  
+    self:AddListener("ray",self.ray)
+    self:AddListener("OnTriggerEnter",self.OnTriggerEnter)  
+end
+
+DemoMain.clientData = {}
+--读取本地记录的数据（玩家账号及设置等信息）
+function UITable:InItClientData() 
+ 		 UI.createScene("mapdemo1","demo") -- 创建场景
+         
+         -- 生成主角预制体
+         self.player = UI.Instantiate(Public.ResMeg.GetPrefabPath("PlayerDemo","map"),nil)  
+         self.player.transform.localPosition =  Vector3(0,0.5,-10)    
+
+         self.shop = UI.Instantiate(Public.ResMeg.GetPrefabPath("NpcDemo","map"),nil)  
+         self.shop.transform.localPosition =  Vector3(-5,0.5,-8)
+         self.shop.name = "shopNPC"
+         self.shop.tag ="NPC" 
+         --  属性赋值
+         self.LV.text =  GameMainData.DemoPlayerModel:GetData().level
+         self.ExpNext = 10 -- 实际上要从配置文件拿
+         self.EXP.text =  GameMainData.DemoPlayerModel:GetData().exp .. "/" .. self.ExpNext
+         
+
+ end 
+
+ function UITable:OnTriggerEnter(evtName,msg)  
+	 
+	   	UI.OpenUI("shopDemo")
+end  
+ 
+ --写入   
+function UITable:rayF(evtName,msg)  
+	 
+end  
+  
+ function UITable:ray(evtName,x,y,z)   
+  
+    print("1122231231231231231")
+ 	self.player.transform:DOKill()
+    self.player.transform:DOMove(Vector3( tonumber(x), 0.5, tonumber( z)) ,1):OnComplete(function()
+
+
+  	end)
+
+      
+end  
+  
+
+
+function UITable:ButtonClickHandler(btn) 
+  -- LuaTools.PlaySound("btnsound") 
+	 if  btn == self.buttonEquip then 
+
+
+		 	UI.OpenUI("equipDemo")
+   
+	end
+end
+    

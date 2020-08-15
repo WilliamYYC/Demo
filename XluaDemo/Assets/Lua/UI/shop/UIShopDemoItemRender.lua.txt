@@ -1,0 +1,37 @@
+local Render = UI.CreateRenderTable() 
+Render.chooseBeC = nil
+function Render:SetUICompent(child)
+-- print("InfoRender SetUICompent  ****  child.name  == " ,child.name )
+	 if child.name == "beChoose" then 
+		self.choose = child:GetComponent("Button") 
+		self.choose.onClick:RemoveAllListeners()  
+		self.choose.onClick:AddListener(function() self:chooseB() end) 
+	 elseif child.name == "buyNum" then
+		self.buyNum = child:GetComponent("Text") 
+	end
+end
+
+function Render:SetData(v) 
+   -- print("InfoRender  SetData  1111111111"   )
+	self.ShopData = v 
+	self:RefreshShopItem()
+end
+
+function Render:RefreshShopItem() 
+	 self.buyNum.text = "剩余购买：" ..self.ShopData.num
+end
+
+
+
+
+
+
+
+function Render:chooseB()  
+	Event.Call("chooseShop",self.ShopData.ID)
+end
+
+
+
+
+return Render
